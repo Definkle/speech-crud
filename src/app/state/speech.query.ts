@@ -20,9 +20,13 @@ export class SpeechQuery extends QueryEntity<SpeechState> {
   findSpeech$(keywords: string): Observable<Speech[]> {
     return combineLatest([this.selectPage$, this.selectAll()]).pipe(
       map(([page, speeches]) => {
-        const filteredSpeeches = speeches.filter((speech) =>
-          speech.keywords?.includes(keywords)
-        );
+        const filteredSpeeches = speeches.filter((speech) => {
+          const lowerCaseKeywords = keywords.toLowerCase();
+          return (
+            speech.keywords?.toLowerCase().includes(lowerCaseKeywords) ||
+            speech.author?.toLowerCase().includes(lowerCaseKeywords)
+          );
+        });
         if (keywords === this.lastKeywords) {
           return this.combineSpeeches(speeches, false, page, keywords);
         } else {

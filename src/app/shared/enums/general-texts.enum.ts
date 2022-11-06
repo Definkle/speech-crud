@@ -4,5 +4,5 @@ export enum GeneralTexts {
   ADD = 'add',
   DELETE = 'delete',
   SAVE = 'save',
-  SHARE = 'share'
+  SHARE = 'share',
 }

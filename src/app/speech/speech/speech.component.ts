@@ -5,9 +5,7 @@ import { Speech } from '../../state/speech.model';
 import { SpeechQuery } from '../../state/speech.query';
 import { SpeechService } from '../../state/speech.service';
 import { GeneralTexts } from '../../shared/enums/general-texts.enum';
-import { UntilDestroy } from '@ngneat/until-destroy';
 
-@UntilDestroy()
 @Component({
   selector: 'app-speech',
   templateUrl: './speech.component.html',

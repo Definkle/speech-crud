@@ -1,10 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { speechTrackBy } from '../../shared/utils/trackbyfn.util';
-import { UntilDestroy } from '@ngneat/until-destroy';
 import { GeneralTexts } from '../../shared/enums/general-texts.enum';
 
-@UntilDestroy()
 @Component({
   selector: 'app-search-speech',
   templateUrl: './search-speech.component.html',
@@ -14,7 +11,6 @@ export class SearchSpeechComponent {
   @ViewChild('searchInput') searchInput!: ElementRef;
   readonly generalTexts = GeneralTexts;
   keywords$: BehaviorSubject<string> = new BehaviorSubject('');
-  trackByFn = speechTrackBy;
 
   findSpeech(): void {
     const searchValue = this.searchInput.nativeElement.value;
