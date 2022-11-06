@@ -1,8 +1,8 @@
-<input class="form-control mb-3" type="text" placeholder="Search" (input)="findSpeech()" #searchInput>
+<input #searchInput (input)="findSpeech()" class="form-control mb-3" placeholder="Search" type="text">
 
 <div class="row">
   <div class="col-sm-12 col-md-2">
-    <app-speech [page]="generalTexts.SEARCH" [keywords$]="keywords$"></app-speech>
+    <app-speech [keywords$]="keywords$" [page]="generalTexts.SEARCH"></app-speech>
   </div>
   <div class="col">
     <app-speech-form [page]="generalTexts.SEARCH"></app-speech-form>

@@ -8,19 +8,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SpeechFormComponent } from './speech-form/speech-form.component';
 import { SpeechComponent } from './speech/speech.component';
 
-
 @NgModule({
   declarations: [
     ViewSpeechComponent,
     AddSpeechComponent,
     SearchSpeechComponent,
     SpeechFormComponent,
-    SpeechComponent
+    SpeechComponent,
   ],
-  imports: [
-    CommonModule,
-    InfiniteScrollModule,
-    ReactiveFormsModule
-  ]
+  imports: [CommonModule, InfiniteScrollModule, ReactiveFormsModule],
 })
-export class SpeechModule { }
+export class SpeechModule {}

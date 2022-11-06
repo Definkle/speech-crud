@@ -10,15 +10,18 @@ import { SpeechService } from '../../state/speech.service';
 @Component({
   selector: 'app-speech-form',
   templateUrl: './speech-form.component.html',
-  styleUrls: ['./speech-form.component.scss']
+  styleUrls: ['./speech-form.component.scss'],
 })
 export class SpeechFormComponent implements OnInit, OnDestroy {
   @Input() page!: string;
   speechForm!: FormGroup;
-  generalTexts = GeneralTexts;
+  readonly generalTexts = GeneralTexts;
 
-  constructor(private formBuilder: FormBuilder, private speechQuery: SpeechQuery, private speechService: SpeechService) {
-  }
+  constructor(
+    private formBuilder: FormBuilder,
+    private speechQuery: SpeechQuery,
+    private speechService: SpeechService
+  ) {}
 
   ngOnInit(): void {
     this.speechForm = this.formBuilder.group({
@@ -26,14 +29,20 @@ export class SpeechFormComponent implements OnInit, OnDestroy {
       speech: ['', [Validators.required]],
       author: ['', [Validators.required]],
       keywords: ['', [Validators.required]],
-      date: ['', [Validators.required]]
+      date: ['', [Validators.required]],
     });
     this.page === this.generalTexts.SEARCH && this.speechForm.disable();
-    this.speechQuery.selectActive().pipe(untilDestroyed(this)).subscribe((activeSpeech) => {
-      if (activeSpeech?.id.length && this.page !== this.generalTexts.ADD) {
-        this.speechForm.setValue({ ...activeSpeech, date: formatDate(activeSpeech.date, 'yyyy-MM-dd', 'en-US') });
-      }
-    });
+    this.speechQuery
+      .selectActive()
+      .pipe(untilDestroyed(this))
+      .subscribe((activeSpeech) => {
+        if (activeSpeech?.id.length && this.page !== this.generalTexts.ADD) {
+          this.speechForm.setValue({
+            ...activeSpeech,
+            date: formatDate(activeSpeech.date, 'yyyy-MM-dd', 'en-US'),
+          });
+        }
+      });
   }
 
   ngOnDestroy(): void {
@@ -46,10 +55,8 @@ export class SpeechFormComponent implements OnInit, OnDestroy {
   }
 
   deleteSpeech(speechId: string): void {
-    if (speechId.length) {
-      this.speechService.deleteSpeech(speechId);
-      this.resetForm();
-    }
+    this.speechService.deleteSpeech(speechId);
+    this.resetForm();
   }
 
   updateSpeech(): void {
@@ -59,5 +66,4 @@ export class SpeechFormComponent implements OnInit, OnDestroy {
   resetForm(): void {
     this.speechForm.reset();
   }
-
 }

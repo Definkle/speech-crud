@@ -5,15 +5,15 @@ import { Observable, tap } from 'rxjs';
 import { SpeechStore } from './speech.store';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SpeechService {
-  constructor(private http: HttpClient, private store: SpeechStore) { }
+  constructor(private http: HttpClient, private store: SpeechStore) {}
 
   loadSpeeches(): Observable<Speech[]> {
-    return this.http.get<Speech[]>("assets/data.json").pipe(
-      tap((speeches) => this.store.set(speeches))
-    );
+    return this.http
+      .get<Speech[]>('assets/data.json')
+      .pipe(tap((speeches) => this.store.set(speeches)));
   }
 
   addSpeech(speech: Speech): void {
@@ -26,6 +26,7 @@ export class SpeechService {
   }
 
   deleteSpeech(speechId: string): void {
+    this.clearActive();
     this.store.remove(speechId);
   }
 
@@ -39,5 +40,9 @@ export class SpeechService {
 
   updateSpeech(speech: Speech): void {
     this.store.update(speech.id, speech);
+  }
+
+  updatePage(page: number): void {
+    this.store.update({ ui: { page } });
   }
 }

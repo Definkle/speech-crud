@@ -11,23 +11,22 @@ const routes: Routes = [
   {
     path: GeneralTexts.VIEW,
     component: ViewSpeechComponent,
-    resolve:[SpeechResolver]
+    resolve: [SpeechResolver],
   },
   {
     path: GeneralTexts.ADD,
     component: AddSpeechComponent,
-    resolve:[SpeechResolver]
+    resolve: [SpeechResolver],
   },
   {
     path: GeneralTexts.SEARCH,
     component: SearchSpeechComponent,
-    resolve:[SpeechResolver]
-  }
+    resolve: [SpeechResolver],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}

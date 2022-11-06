@@ -6,13 +6,13 @@
   </div>
   <div class="row mb-3">
     <div class="col-sm-12 col-md-4 mb-1">
-      <input class="form-control" type="text" formControlName="author" placeholder="Author">
+      <input class="form-control" formControlName="author" placeholder="Author" type="text">
     </div>
     <div class="col-sm-12 col-md-4 mb-1">
-      <input class="form-control" type="text" formControlName="keywords" placeholder="Subject area keywords">
+      <input class="form-control" formControlName="keywords" placeholder="Subject area keywords" type="text">
     </div>
     <div class="col-sm-12 col-md-4 mb-1">
-      <input class="form-control" type="date" formControlName="date">
+      <input class="form-control" formControlName="date" type="date">
     </div>
   </div>
 </form>
@@ -21,17 +21,26 @@
   <ng-container [ngSwitch]="page">
     <ng-container *ngSwitchCase="generalTexts.VIEW">
       <div class="form-btn">
-        <button class="btn btn-light" [disabled]="speechForm.invalid" (click)="deleteSpeech(speechForm.value.id)">DELETE</button>
+        <button (click)="deleteSpeech(speechForm.value.id)" [disabled]="speechForm.invalid" class="btn btn-light">
+          {{generalTexts.DELETE | uppercase}}
+        </button>
       </div>
       <div class="form-btn">
-        <button class="btn btn-light" (click)="updateSpeech()">SAVE</button>
+        <button (click)="updateSpeech()" [disabled]="speechForm.invalid"
+                class="btn btn-light">
+          {{generalTexts.SAVE | uppercase}}
+        </button>
       </div>
       <div class="form-btn">
-        <button class="btn btn-light">SHARE</button>
+        <button class="btn btn-light">
+          {{generalTexts.SHARE | uppercase}}
+        </button>
       </div>
     </ng-container>
     <ng-container *ngSwitchCase="generalTexts.ADD">
-      <button class="btn btn-primary" (click)="addSpeech()" [disabled]="speechForm.invalid">ADD</button>
+      <button (click)="addSpeech()" [disabled]="speechForm.invalid"
+              class="btn btn-primary">{{generalTexts.ADD | uppercase}}
+      </button>
     </ng-container>
     <ng-container *ngSwitchDefault>
 

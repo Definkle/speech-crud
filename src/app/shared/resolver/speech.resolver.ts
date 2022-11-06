@@ -7,9 +7,10 @@ import { SpeechQuery } from 'src/app/state/speech.query';
 
 @Injectable({ providedIn: 'root' })
 export class SpeechResolver implements Resolve<Observable<Speech[]>> {
-
-  constructor(private speechService: SpeechService, private speechQuery: SpeechQuery) {
-  }
+  constructor(
+    private speechService: SpeechService,
+    private speechQuery: SpeechQuery
+  ) {}
 
   resolve(): Observable<Speech[]> {
     const speeches = this.speechQuery.getAll();
@@ -19,4 +20,3 @@ export class SpeechResolver implements Resolve<Observable<Speech[]>> {
     return this.speechService.loadSpeeches();
   }
 }
-

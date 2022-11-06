@@ -1,65 +1,61 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { speechTrackBy } from '../../shared/utils/trackbyfn.util';
-import { finalize, Observable, switchMap, take } from 'rxjs';
+import { filter, Observable, switchMap } from 'rxjs';
 import { Speech } from '../../state/speech.model';
 import { SpeechQuery } from '../../state/speech.query';
 import { SpeechService } from '../../state/speech.service';
 import { GeneralTexts } from '../../shared/enums/general-texts.enum';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy } from '@ngneat/until-destroy';
 
 @UntilDestroy()
 @Component({
   selector: 'app-speech',
   templateUrl: './speech.component.html',
-  styleUrls: ['./speech.component.scss']
+  styleUrls: ['./speech.component.scss'],
 })
 export class SpeechComponent implements OnInit, OnDestroy {
   @Input() keywords$?: Observable<string>;
-  @Input() page?: string;
+  @Input() page: string = GeneralTexts.VIEW;
 
-  speeches$?: Observable<Speech[]>;
+  speeches$!: Observable<Speech[]>;
   activeSpeechId?: string;
-  currentPage: number = 0;
-  keywords: string = '';
 
   trackByFn = speechTrackBy;
 
-  constructor(private speechQuery: SpeechQuery, private speechService: SpeechService) { }
+  constructor(
+    private speechQuery: SpeechQuery,
+    private speechService: SpeechService
+  ) {}
 
   ngOnInit(): void {
     this.loadSpeeches();
-    if (this.page === GeneralTexts.SEARCH) {
-      this.keywords$?.pipe(
-        untilDestroyed(this),
-        switchMap((keywords) => {
-          this.speechService.resetUi();
-          this.keywords = keywords;
-          return this.speechQuery.findSpeech(keywords, this.currentPage).pipe(take(1));
-        }),
-        finalize(() => this.currentPage++)
-      ).subscribe()
-    }
-    this.speeches$ = this.speechQuery.selectSpeechesUI$;
   }
 
   ngOnDestroy(): void {
     this.speechService.resetUi();
+    this.speechQuery.resetLastProperties();
   }
 
   loadSpeeches(): void {
-    this.page === GeneralTexts.VIEW
-      ? this.speechQuery.selectPage(this.currentPage).pipe(take(1)).subscribe()
-    : this.speechQuery.findSpeech(this.keywords, this.currentPage).pipe(take(1)).subscribe();
+    if (this.page === GeneralTexts.VIEW) {
+      this.speeches$ = this.speechQuery.selectAll$();
+      return;
+    }
+    this.speeches$ = this.keywords$?.pipe(
+      filter(() => this.page === GeneralTexts.SEARCH),
+      switchMap((keywords) => {
+        this.speechService.resetUi();
+        return this.speechQuery.findSpeech$(keywords);
+      })
+    ) as Observable<Speech[]>;
   }
 
   onScroll() {
-    this.currentPage++;
-    this.loadSpeeches();
+    this.speechService.updatePage(this.speechQuery.getValue().ui.page + 1);
   }
 
   viewSpeech(speech: Speech): void {
     this.activeSpeechId = speech.id;
     this.speechService.setActive(speech);
   }
-
 }
