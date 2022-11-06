@@ -1,0 +1,42 @@
+<form [formGroup]="speechForm">
+  <div class="row mb-3">
+    <div class="col">
+      <textarea class="form-control" formControlName="speech"></textarea>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-sm-12 col-md-4 mb-1">
+      <input class="form-control" type="text" formControlName="author" placeholder="Author">
+    </div>
+    <div class="col-sm-12 col-md-4 mb-1">
+      <input class="form-control" type="text" formControlName="keywords" placeholder="Subject area keywords">
+    </div>
+    <div class="col-sm-12 col-md-4 mb-1">
+      <input class="form-control" type="date" formControlName="date">
+    </div>
+  </div>
+</form>
+
+<div class="d-flex justify-content-end">
+  <ng-container [ngSwitch]="page">
+    <ng-container *ngSwitchCase="generalTexts.VIEW">
+      <div class="form-btn">
+        <button class="btn btn-light" [disabled]="speechForm.invalid" (click)="deleteSpeech(speechForm.value.id)">DELETE</button>
+      </div>
+      <div class="form-btn">
+        <button class="btn btn-light" (click)="updateSpeech()">SAVE</button>
+      </div>
+      <div class="form-btn">
+        <button class="btn btn-light">SHARE</button>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="generalTexts.ADD">
+      <button class="btn btn-primary" (click)="addSpeech()" [disabled]="speechForm.invalid">ADD</button>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+
+    </ng-container>
+  </ng-container>
+
+
+</div>

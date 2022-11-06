@@ -1,0 +1,15 @@
+<div class="search-results"
+     infiniteScroll
+     [infiniteScrollDistance]="2"
+     [infiniteScrollUpDistance]="1.5"
+     [infiniteScrollThrottle]="50"
+     [scrollWindow]="false"
+     (scrolled)="onScroll()">
+
+  <div *ngFor="let speech of (speeches$ | async); trackBy: trackByFn; let i = index" class="row"
+       (click)="viewSpeech(speech)">
+    <div class="speech-item" [ngClass]="{'active': activeSpeechId === speech.id}">
+      <span>Speech {{i + 1}}</span>
+    </div>
+  </div>
+</div>
