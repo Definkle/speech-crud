@@ -4,8 +4,7 @@ export class ProjectConst {
   static readonly Search = 'SEARCH';
   static readonly Add = 'ADD';
   static readonly Delete = 'DELETE';
-  static readonly Save = 'SAVE';
-  static readonly Share = 'SHARE';
+  static readonly Update = 'UPDATE';
   static readonly PageTitle = 'Speech-CRUD';
   static readonly DateFormat = 'yyyy-MM-dd';
   static readonly Locale = 'en-US';

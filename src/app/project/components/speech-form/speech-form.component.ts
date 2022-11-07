@@ -11,7 +11,7 @@ import { SpeechQuery } from '../../state/speech/speech.query';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SpeechService } from '../../state/speech/speech.service';
 import { ProjectConst } from '../../config/const';
-import { DateUtil } from '../../utils/date';
+import { DateUtil } from '../../utils/date.util';
 import { filter, tap } from 'rxjs/operators';
 
 @UntilDestroy()
