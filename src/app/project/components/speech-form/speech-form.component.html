@@ -1,0 +1,49 @@
+<form [formGroup]="speechForm" novalidate>
+  <div class="d-flex flex-row mb-3">
+    <div class="flex-fill">
+      <textarea class="form-control" formControlName="speech"></textarea>
+    </div>
+  </div>
+  <div class="d-flex flex-sm-column flex-md-row gap-3 mb-3">
+    <div class="flex-fill">
+      <input class="form-control" formControlName="author" placeholder="Author" type="text">
+    </div>
+    <div class="flex-fill">
+      <input class="form-control" formControlName="keywords" placeholder="Subject area keywords" type="text">
+    </div>
+    <div class="flex-fill">
+      <input class="form-control" formControlName="date" type="date">
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end gap-3">
+    <ng-container [ngSwitch]="page">
+      <ng-container *ngSwitchCase="projectConst.View">
+        <div class="form-btn">
+          <button (click)="deleteSpeech(speechForm.value.id)" [disabled]="speechForm.invalid" class="btn btn-danger">
+            {{projectConst.Delete}}
+          </button>
+        </div>
+        <div class="form-btn">
+          <button (click)="updateSpeech()" [disabled]="speechForm.invalid"
+                  class="btn btn-primary">
+            {{projectConst.Save}}
+          </button>
+        </div>
+        <div class="form-btn">
+          <button class="btn btn-info">
+            {{projectConst.Share}}
+          </button>
+        </div>
+      </ng-container>
+      <ng-container *ngSwitchCase="projectConst.Add">
+        <button (click)="addSpeech()" [disabled]="speechForm.invalid"
+                class="btn btn-primary">{{projectConst.Add}}
+        </button>
+      </ng-container>
+      <ng-container *ngSwitchDefault>
+
+      </ng-container>
+    </ng-container>
+  </div>
+</form>

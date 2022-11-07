@@ -4,18 +4,10 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { SpeechModule } from './speech/speech.module';
-import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    AppRoutingModule,
-    CommonModule,
-    BrowserModule,
-    HttpClientModule,
-    SpeechModule,
-  ],
+  imports: [AppRoutingModule, BrowserModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })

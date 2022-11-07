@@ -1,0 +1,12 @@
+<div (scrolled)="onScroll()"
+     [infiniteScrollDistance]="2"
+     [infiniteScrollThrottle]="50"
+     [infiniteScrollUpDistance]="1.5"
+     [scrollWindow]="false"
+     class="search-results d-flex flex-column"
+     infiniteScroll>
+  <div (click)="viewSpeech(speech)" *ngFor="let speech of (speeches$ | async); trackBy: trackByFn; let idx = index"
+       class="flex-fill">
+    <app-speech-details [activeSpeechId]="activeSpeechId$ | async" [index]="idx" [speech]="speech"></app-speech-details>
+  </div>
+</div>

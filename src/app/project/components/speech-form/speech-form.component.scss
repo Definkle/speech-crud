@@ -1,0 +1,10 @@
+.form-btn {
+  &.disabled {
+    cursor: not-allowed;
+  }
+}
+
+textarea {
+  height: 220px;
+  resize: none;
+}

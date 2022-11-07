@@ -1,0 +1,10 @@
+<input #searchInput (input)="findSpeech()" class="form-control mb-3" placeholder="Search" type="text">
+
+<div class="d-flex flex-sm-column flex-md-row gap-3">
+  <div class="flex-column">
+    <app-speech-list [keywords$]="keywords$" [page]="projectConst.Search"></app-speech-list>
+  </div>
+  <div class="flex-column flex-fill">
+    <app-speech-form [page]="projectConst.Search"></app-speech-form>
+  </div>
+</div>

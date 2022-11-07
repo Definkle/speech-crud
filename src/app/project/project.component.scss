@@ -1,0 +1,17 @@
+a {
+  text-decoration: none;
+  text-align: center;
+  color: black;
+  padding: 5px 10px;
+  border: 1px solid black;
+  font-size: 1rem;
+
+  &.active-link {
+    background: #e9ecef;
+    border: transparent;
+  }
+}
+
+nav {
+  margin: 10px 0;
+}

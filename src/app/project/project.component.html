@@ -1,0 +1,13 @@
+<div class="container">
+  <nav class="d-flex flex-sm-column flex-md-row">
+    <a [routerLink]="projectConst.View" class="flex-fill fw-light"
+       routerLinkActive="active-link">{{projectConst.View}}</a>
+    <a [routerLink]="projectConst.Add" class="flex-fill fw-light"
+       routerLinkActive="active-link">{{projectConst.Add}}</a>
+    <a [routerLink]="projectConst.Search" class="flex-fill fw-light"
+       routerLinkActive="active-link">{{projectConst.Search}}</a>
+  </nav>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</div>

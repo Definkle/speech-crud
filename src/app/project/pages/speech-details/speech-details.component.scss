@@ -1,0 +1,14 @@
+.speech-item {
+  margin-bottom: 10px;
+  border: 1px solid black;
+
+  span {
+    font-size: 20px;
+    padding: 10px;
+  }
+
+  &.active {
+    background: #e9ecef;
+    border: transparent;
+  }
+}
