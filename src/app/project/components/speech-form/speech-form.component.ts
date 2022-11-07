@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  Input,
   OnDestroy,
   OnInit,
 } from '@angular/core';
@@ -13,6 +12,7 @@ import { SpeechService } from '../../state/speech/speech.service';
 import { ProjectConst } from '../../config/const';
 import { DateUtil } from '../../utils/date.util';
 import { filter, tap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @UntilDestroy()
 @Component({
@@ -22,11 +22,12 @@ import { filter, tap } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SpeechFormComponent implements OnInit, OnDestroy {
-  @Input() page!: string;
   readonly projectConst = ProjectConst;
+  page?: string;
   speechForm!: FormGroup;
 
   constructor(
+    private activatedRoute: ActivatedRoute,
     private cdr: ChangeDetectorRef,
     private formBuilder: FormBuilder,
     private speechQuery: SpeechQuery,
@@ -42,8 +43,8 @@ export class SpeechFormComponent implements OnInit, OnDestroy {
       date: ['', [Validators.required]],
     });
 
+    this.page = this.activatedRoute.snapshot.routeConfig?.path;
     this.page === this.projectConst.Search && this.speechForm.disable();
-
     this.setFormValue();
   }
 
