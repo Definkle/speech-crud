@@ -1,4 +1,9 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  ViewChild,
+} from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ProjectConst } from '../../config/const';
 
@@ -6,6 +11,7 @@ import { ProjectConst } from '../../config/const';
   selector: 'app-search-speech-list',
   templateUrl: './search-speech.component.html',
   styleUrls: ['./search-speech.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchSpeechComponent {
   @ViewChild('searchInput') searchInput!: ElementRef;

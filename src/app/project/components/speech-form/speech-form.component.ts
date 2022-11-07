@@ -65,6 +65,9 @@ export class SpeechFormComponent implements OnInit, OnDestroy {
     this.speechService.updateSpeech(this.speechForm.value);
   }
 
+  /**
+   * Sets the form value based on the active speech in the store.
+   */
   private setFormValue(): void {
     this.speechQuery
       .selectActive()
